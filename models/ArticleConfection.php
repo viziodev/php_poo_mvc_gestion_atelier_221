@@ -1,11 +1,10 @@
 <?php 
-class ArticleConfection{
+class ArticleConfection extends Model{
     private int $id;
     private string $libelle;
     private float $prixAchat;
     private int $qteStock;
     private string $photo;
-
    
       //Cle etrangere
         private int $categorieId;
@@ -110,4 +109,10 @@ class ArticleConfection{
 
         return $this;
     }
+
+     public function create(){
+            
+        }
+
+   
 }

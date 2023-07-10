@@ -1,5 +1,7 @@
 <?php 
+require "./../models/Model.php";
 require "./../models/Categorie.php";
+require_once "../helpers/help.php";
 /**
  * Manipulation une Classe 
  *  1.Creer Objet   $objet =new NomClasse()
@@ -12,10 +14,14 @@ require "./../models/Categorie.php";
  * 
  *   
  */
+
+dd(Categorie::all());
+die;
 $categorie=new Categorie();
-$categorie->setId(1);
-$categorie->setLibelle("Tissu");
+$categorie->setLibelle("Tissu1");
 $categorie->create();
+var_dump($categorie);
+die;
 
 $categorie1=new Categorie();
 $categorie1->setId(1)   

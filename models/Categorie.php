@@ -7,7 +7,7 @@
  *    
  */
 
- class Categorie{
+ class Categorie extends Model{
        //Attributs   ==> Donnees ou informations
          //Convention 
            //1-camelCase  ==> Exemple: monAttribut
@@ -15,6 +15,10 @@
         //[visibilite(private(-)|public(+)|protected(#)) ] type(php 8>) $attribut
          private int $id;
          private string $libelle;
+        
+           protected static function tableName(){
+               return "categorie";
+          }
 
 
        //Methodes   ==> Fonctions 
@@ -37,14 +41,29 @@
 
 
            
-        public function create(){
+        public function create():int{
+          //1-Connexion a la BD
+            $bdd = new PDO('mysql:host=127.0.0.1:8889;dbname=gestion_atelier_php_221;charset=utf8', 'root', 'root');
+            //2- ECRIRE LA REQUETE ==> CHANGE 1
+            //Injection sql
+             $req = $bdd->prepare('INSERT INTO '.self::tableName().' (libelle) VALUES (:libelle)');
+            //3- EFFECTUE LA REQUETE ==> CHANGE 2
+              $req->execute(['libelle' => $this->libelle]);
+            //4- FIN DE LA REQUETE ==> CHANGE 3
+             
+              if($req->rowCount()>0){
+                $this->id= $bdd->lastInsertId();
+              }
+
+
+                   $req->closeCursor();
+                 return  $req->rowCount();
+            
+          
             
         }
 
-        public function all(){
-            
-        }
-
+       
          /**
           * Get the value of id
           */ 
@@ -60,7 +79,10 @@
           */ 
          public function setId($id)
          {
-                  $this->id = $id;
+              if($id>0){
+                $this->id = $id;
+              }
+                  //$this->id = $id;
 
                   return $this;
          }
