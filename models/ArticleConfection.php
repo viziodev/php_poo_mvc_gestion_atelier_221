@@ -4,8 +4,10 @@ class ArticleConfection extends Model{
     private string $libelle;
     private float $prixAchat;
     private int $qteStock;
-    private string $photo;
-   
+    private string|null $photo;
+    protected static function tableName(){
+               return "article_confection";
+    }
       //Cle etrangere
         private int $categorieId;
        //Navigation 
@@ -110,9 +112,9 @@ class ArticleConfection extends Model{
         return $this;
     }
 
-     public function create(){
+        /* public function create(){
             
-        }
+        }*/
 
    
 }

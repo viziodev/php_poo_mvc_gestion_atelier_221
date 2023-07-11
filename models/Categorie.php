@@ -15,12 +15,13 @@
         //[visibilite(private(-)|public(+)|protected(#)) ] type(php 8>) $attribut
          private int $id;
          private string $libelle;
-        
-           protected static function tableName(){
-               return "categorie";
-          }
+           
 
 
+
+           protected static function tableName() { 
+              return "categorie"; 
+           }
        //Methodes   ==> Fonctions 
           //Convention 
            //1-camelCase  ==>  maFonction(arg)
@@ -40,7 +41,7 @@
           
 
 
-           
+      /*    
         public function create():int{
           //1-Connexion a la BD
             $bdd = new PDO('mysql:host=127.0.0.1:8889;dbname=gestion_atelier_php_221;charset=utf8', 'root', 'root');
@@ -63,7 +64,7 @@
             
         }
 
-       
+        */
          /**
           * Get the value of id
           */ 
