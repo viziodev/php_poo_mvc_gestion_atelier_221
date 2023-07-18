@@ -9,9 +9,17 @@ class ArticleConfection extends Model{
                return "article_confection";
     }
       //Cle etrangere
-        private int $categorieId;
-       //Navigation 
-       private Categorie $categorie;
+    private int $categorieId;
+    private  Categorie $categorieModel ;
+
+    public function __construct(){  
+        $this->categorieModel = new Categorie();
+    }
+    
+        //Navigabite   ManyToOne
+    public function categorie(){
+       return  $this->categorieModel->find($this->categorieId);
+    }
     /**
      * Get the value of id
      */ 
