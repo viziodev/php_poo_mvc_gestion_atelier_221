@@ -1,18 +1,38 @@
 <?php
+require_once "../core/bootstrap.php";
 require_once "../core/Controller.php";
 require_once "../controllers/CategorieController.php";
 require_once "../controllers/ArticleConfectionController.php";
-//require "./../models/ArticleConfection.php";
-require_once "../helpers/help.php";
+require_once "../controllers/ApproController.php";
+require_once "./../models/Categorie.php";
+
+$categorie=new Categorie();
+$categorie->setId(1);
+dd($categorie->update([
+     "libelle"=>"Test3"
+]));
+
 
 
 $ctrl =new CategorieController;
 $ctrlArticle =new ArticleConfectionController ;
-if(isset($_GET["path"])){
-  $path = $_GET["path"];
+
+$ctrlAppro =new ApproController ;
+
+if(isset($_REQUEST["path"])){
+  $path = $_REQUEST["path"];
   if( $path=="categorie" ){
     $ctrl->index();
   }elseif($path=="article"){
     $ctrlArticle->index();
+  }elseif($path=="store-categorie"){
+    $ctrl->store();
+  }elseif($path=="appro"){
+    $ctrlAppro->index();
+  }elseif($path=="update-paiement-appro"){
+    $ctrlAppro->updatePaiement();
   }
+}else{
+     $ctrl->index();
 }
+  

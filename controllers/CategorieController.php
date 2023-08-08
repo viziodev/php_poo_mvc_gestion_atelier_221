@@ -1,8 +1,6 @@
 <?php  
-require "./../core/DataBase.php";
-require "./../core/Model.php";
-require "./../models/Categorie.php";
 
+require "./../models/Categorie.php";
 class CategorieController extends Controller { 
     /**
      * lister Categorie
@@ -10,11 +8,9 @@ class CategorieController extends Controller {
      * @return mixed
      */
     public function index() {
-        $datas=Categorie::all();
-        ob_start() ;
-          require "../ressources/views/categorie/liste.html.php";  
-           $content_for_view = ob_get_clean();
-          require "../ressources/views/base.layout.html.php";  
+           $datas=Categorie::all();
+           $this->view('categorie/liste',["datas" => $datas]);
+        
     }
     /**
      * charger le Formulaire de Categorie
@@ -32,6 +28,22 @@ class CategorieController extends Controller {
      * @return mixed
      */
       public function store() {
+
+        Validator::isVide($_POST["libelle"],"libelle");
         
+        if(Validator::validate()){
+          try {
+              Categorie::create([
+              "libelle" => $_POST["libelle"]
+            ]);
+          } catch (PDOException $th) {
+              //die($th->getMessage());
+              Validator::$errors['libelle'] = "le libelle existe deja";
+          }
+          
+        }
+          Session::set("errors",Validator::$errors);
+        
+        $this->redirect("categorie");
       }
 }

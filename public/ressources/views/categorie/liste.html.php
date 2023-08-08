@@ -1,4 +1,25 @@
-<div class="container mt-5 ">
+<?php
+$errors=[];
+    if(Session::isset("errors")){
+      $errors=Session::get("errors");
+       Session::unset("errors");
+    }
+?><div class="container mt-5 ">
+    <form class="row g-3 needs-validation" novalidate method="post" action="<?=WEB_URL?>">
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">Libelle</label>
+            <input type="text" class="form-control <?=isset($errors['libelle'])?'is-invalid':''?> "
+                id="validationCustom01" name="libelle" value="">
+            <div class="invalid-feedback">
+                <?=$errors['libelle']??""?>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-top: 48px;">
+            <label for="validationCustom01" class="form-label "></label>
+            <button class="btn btn-primary" type="submit">Enregistrer</button>
+        </div>
+        <input type="hidden" name="path" value="store-categorie">
+    </form>
     <div class="card mt-5">
 
         <div class="card-body bg-white">

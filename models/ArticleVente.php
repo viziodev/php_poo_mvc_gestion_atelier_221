@@ -2,22 +2,21 @@
 class ArticleConfection extends Model{
     public int $id;
     public string $libelle;
-    public float $prixAchat;
     public int $qteStock;
     public string|null $photo;
     protected static function tableName(){
-               return "article_confection";
+               return "article_vente";
     }
       //Cle etrangere
-    private int $categorieId;
-    public function __construct(){  
+    public int $categorieId;
     
-    }
-    
-        //Navigabite   ManyToOne
-    public function categorie(){
+     //Navigabite   ManyToOne
+     public function categorie(){
        return  Categorie::find($this->categorieId);
-    }
-   
+     }
+     public function addArticleConfection(array $data){
+    
+     }
+    
    
 }

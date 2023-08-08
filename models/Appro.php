@@ -18,5 +18,14 @@ class Appro extends Model{
    public function details() {
       return $this->detailAppro->findDetailByAppro($this->id);
    }
+
+   public function formatPaiement():string {
+      return $this->paiement==true?"Payer":"Impayer";
+   }
+
+   public static function updatePaiement(int $approId,int $statut=1)  {
+      return self::executeUpdate("UPDATE `appro` SET `paiement` = :statut WHERE `appro`.`id` = :approId",['approId'=>$approId,"statut"=>$statut]);
+      
+   }
     
 }

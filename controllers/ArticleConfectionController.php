@@ -8,11 +8,7 @@ class ArticleConfectionController extends Controller {
      */
     public function index() {
         
-          ob_start() ;
-         require "../ressources/views/article/liste.html.php";  
-         $content_for_view = ob_get_clean(); 
-         require "../ressources/views/base.layout.html.php"; 
-        
+            $this->view('article/liste');
         //view("article/liste.html");
         //$this->view("article/liste.html");
         /**

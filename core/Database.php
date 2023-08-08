@@ -16,6 +16,8 @@ class Database{
      public static function closeConnexion(){
            self::$bdd=null;
     }
+
+    
     
     
 }
